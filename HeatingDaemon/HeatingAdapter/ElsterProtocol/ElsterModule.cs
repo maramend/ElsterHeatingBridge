@@ -56,7 +56,7 @@ public enum ElsterModule
     /// CAN-ID 0x0301 - Remote control module (Heizungs-Fernversteller oder Fernbedienung)
     /// (FEK bei Stiebel Eltron, FET bei Tecalor) - HK 1
     /// </summary>
-    RemoteControl = 0x301,
+    RemoteControl = 0x401,
     /// <summary>
     /// CAN-ID 0x0379 - Remote control module broadcast
     /// </summary>
