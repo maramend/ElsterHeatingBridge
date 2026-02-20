@@ -100,6 +100,8 @@ public class ElsterValue
                 return (sbyte)shortValue;
             case ElsterValueType.et_bool:
                 return (shortValue == 0x0001)? true: (shortValue==0)? false: null;
+            case ElsterValueType.et_neg_bool:
+                return (shortValue == 0x0001)? false: (shortValue==0)? true: null;
             case ElsterValueType.et_little_bool:
                 return (shortValue == 0x0100)? true: (shortValue==0)? false: null;
             case ElsterValueType.et_double_val:
@@ -179,10 +181,15 @@ public class ElsterValue
     /// <returns>Der sbyte-Wert des ElsterValues oder null wenn der Typ nicht passt.</returns>
     public sbyte? GetByteValue() => (sbyte?)ConvertByteArrayToType(_valueByteArray, ElsterValueType.et_byte);
     /// <summary>
-    /// Gibt den bool-Wert des ElsterValues zurück(et_bool).
+    /// Gibt den bool-Wert des ElsterValues zurück (et_bool).
     /// </summary>
     /// <returns>Der bool-Wert des ElsterValues oder null wenn der Typ nicht passt.</returns>
     public bool? GetBooleanValue() => (bool?)ConvertByteArrayToType(_valueByteArray, ElsterValueType.et_bool);
+    /// <summary>
+    /// Gibt den negierten bool-Wert des ElsterValues zurück (et_neg_bool).
+    /// </summary>
+    /// <returns>Der negierte bool-Wert des ElsterValues oder null wenn der Typ nicht passt.</returns>
+    public bool? GetNegBooleanValue() => (bool?)ConvertByteArrayToType(_valueByteArray, ElsterValueType.et_neg_bool);
     /// <summary>
     /// Gibt den bool-Wert des ElsterValues aus einem Little-Endian-Form zurück (et_little_bool).
     /// </summary>
@@ -324,6 +331,21 @@ public class ElsterValue
                 {
                     if (elsterValue == 0) {
                         retString.Append("off");
+                    }
+                    else {
+                        retString.Append($"0x{(ushort)elsterValue:X4}?:et_bool");
+                    }
+                }
+                break;
+            case ElsterValueType.et_neg_bool:
+                if (elsterValue == 0x0001)
+                {
+                    retString.Append("off");
+                }
+                else
+                {
+                    if (elsterValue == 0) {
+                        retString.Append("on");
                     }
                     else {
                         retString.Append($"0x{(ushort)elsterValue:X4}?:et_bool");

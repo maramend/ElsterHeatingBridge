@@ -107,7 +107,7 @@ public partial class KElsterTable
         ( "ANTILEG_AKTIV"                                    , 0x0072, 0),
         ( "BITSCHALTER"                                      , 0x0073, 0),
         // EVU Freigabe(EVU_SPERRE_AKTIV): 0x0001 true   0x0000 false (umgekehrte Bedeutung)
-        ( "EVU_SPERRE_AKTIV"                                 , 0x0074, ElsterValueType.et_bool),
+        ( "EVU_SPERRE_AKTIV"                                 , 0x0074, ElsterValueType.et_neg_bool),
         ( "FEUCHTE"                                          , 0x0075, ElsterValueType.et_dec_val),
         ( "PUFFERTEMP_OBEN1"                                 , 0x0076, ElsterValueType.et_dec_val),
         ( "PUFFERTEMP_MITTE1"                                , 0x0077, ElsterValueType.et_dec_val),

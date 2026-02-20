@@ -11,6 +11,7 @@ public enum ElsterValueType
     et_mil_val,       // x.xxx
     et_byte,
     et_bool,          // 0x0000 und 0x0001
+    et_neg_bool,      // 0x0001 und 0x0000
     et_little_bool,   // 0x0000 und 0x0100
     et_double_val,
     et_triple_val,
