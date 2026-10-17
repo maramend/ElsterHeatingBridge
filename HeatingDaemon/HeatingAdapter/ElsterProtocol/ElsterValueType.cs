@@ -17,6 +17,7 @@ public enum ElsterValueType
     et_triple_val,
     et_little_endian,
     et_betriebsart,
+    et_betriebsart_ttlacs,
     et_zeit,
     et_datum,
     et_time_domain,

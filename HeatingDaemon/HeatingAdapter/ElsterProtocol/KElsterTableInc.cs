@@ -3338,6 +3338,13 @@ public partial class KElsterTable
         ( "LAUFZEIT_VD_ABTAUEN"                              , 0x4f06, 0),
         ( "KUEHL_ISTTEMP_KK1"                                , 0x4f09, ElsterValueType.et_dec_val),
         ( "KUEHL_SOLLTEMP_KK1"                               , 0x4f0a, ElsterValueType.et_dec_val),
+        // Notbetrieb     0x0000
+        // Bereitschaft   0x0001
+        // Programm       0x0002
+        // Komfort        0x0003
+        // Eco            0x0004
+        // Warmwasser     0x0005
+        ( "PROGRAMM"                                         , 0x4f1b, ElsterValueType.et_betriebsart_ttlacs),
         ( "VORLAUFISTTEMP NHZ"                               , 0x4f40, ElsterValueType.et_dec_val),
         ( "VORLAUFISTTEMP WP"                                , 0x4f41, ElsterValueType.et_dec_val),
         ( "RUECKLAUFISTTEMP WP"                              , 0x4f43, ElsterValueType.et_dec_val),
@@ -3785,4 +3792,15 @@ public partial class KElsterTable
         (0x0400, "Absenkbetrieb"),
         (0x0500, "Warmwasser")
     };
+
+    public static (ushort Index, string Name)[] BetriebsartList_TTLACS =
+    {
+        (0x0000, "Notbetrieb"),
+        (0x0001, "Bereitschaftsbetrieb"),
+        (0x0002, "Programmbetrieb"),
+        (0x0003, "Komfortbetrieb"),
+        (0x0004, "Eco-Betrieb"),
+        (0x0005, "Warmwasserbetrieb")
+    };
+
 }

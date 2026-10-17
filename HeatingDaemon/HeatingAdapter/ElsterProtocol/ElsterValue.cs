@@ -144,6 +144,11 @@ public class ElsterValue
                     return BetriebsartList[(ushort)shortValue >> 8].Name;
                 else
                     return $"?:et_betriebsart{(ushort)shortValue}";
+            case ElsterValueType.et_betriebsart_ttlacs:
+                if (((ushort)shortValue & 0xff00) == 0 && ((ushort)shortValue) < BetriebsartList_TTLACS.Length)
+                    return BetriebsartList_TTLACS[(ushort)shortValue].Name;
+                else
+                    return $"?:et_betriebsart_ttlacs{(ushort)shortValue}";
             default:
                 return null;
         }
@@ -215,6 +220,11 @@ public class ElsterValue
     /// </summary>
     /// <returns>Der string-Wert des ElsterValues aus der Liste-Betriebsarten oder null wenn der Typ nicht passt.</returns>
     public string? GetBetriebsartValue() => (string?)ConvertByteArrayToType(_valueByteArray, ElsterValueType.et_betriebsart);
+    /// <summary>
+    /// Gibt den string-Wert des ElsterValues aus der Liste-Betriebsarten für TTL ACS wie z.B 'Notbetrieb' zurück (et_betriebsart_ttlacs).
+    /// </summary>
+    /// <returns>Der string-Wert des ElsterValues aus der Liste-Betriebsarten oder null wenn der Typ nicht passt.</returns>
+    public string? GetBetriebsartValue_TTLACS() => (string?)ConvertByteArrayToType(_valueByteArray, ElsterValueType.et_betriebsart_ttlacs);
     /// <summary>
     /// Gibt den TimeSpan-Wert des ElsterValues in der Form "HH:mm" zurück (et_zeit).
     /// </summary>
@@ -432,6 +442,15 @@ public class ElsterValue
                     retString.Append(BetriebsartList[elsterValue >> 8].Name);
                 else
                     retString.Append($"0x{(ushort)elsterValue:X4} ?:et_betriebsart");
+                break;
+            case ElsterValueType.et_betriebsart_ttlacs:
+                // byte betriebsart_ttlacs = (byte)(elsterValue >> 8);
+                // if(betriebsart_ttlacs==0x80)
+                //    retString.Append("et_betriebsart_ttlacs:unavailable");
+                if ((elsterValue & 0xff00) == 0 && elsterValue < BetriebsartList_TTLACS.Length)
+                    retString.Append(BetriebsartList_TTLACS[elsterValue].Name);
+                else
+                    retString.Append($"0x{(ushort)elsterValue:X4} ?:et_betriebsart_ttlacs");
                 break;
         }
       
