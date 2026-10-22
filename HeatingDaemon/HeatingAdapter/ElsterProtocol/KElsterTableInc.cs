@@ -262,7 +262,7 @@ public partial class KElsterTable
         // Pufferladepumpe 2:   0x0080
         // DHC 1:               0x1000
         // DHC 2:               0x2000
-        // Warmwasserladepumpe: 0x8000
+        // Warmwasserladepumpe: 0x4000
         // EVU Sperre:          0x8000
         ( "BETRIEBS_STATUS"                                  , 0x0176, 0),
         ( "ZUSTAND_BCC"                                      , 0x0177, 0),
@@ -306,7 +306,7 @@ public partial class KElsterTable
         ( "SOFTWARE_VERSION"                                 , 0x019a, 0),
         ( "SPEICHER_ZEIT_STATUS"                             , 0x019b, 0),
         // HK1 Pumpe:         0x0001
-        // HK2 Punpe:         0x0002
+        // HK2 Pumpe:         0x0002
         // Mischer auf:       0x0004
         // Mischer zu:        0x0008
         // Quellenpumpe:      0x0010
@@ -1817,7 +1817,7 @@ public partial class KElsterTable
         ( "MESSSTROM_NIEDERDRUCK"                            , 0x07a5, 0),
         ( "DRUCK HOCHDRUCK"                                  , 0x07a6, ElsterValueType.et_cent_val),
         ( "DRUCK NIEDERDRUCK"                                , 0x07a7, ElsterValueType.et_cent_val),
-        ( "VERDICHTER"                                       , 0x07a8, ElsterValueType.et_cent_val),
+        //( "VERDICHTER"                                       , 0x07a8, ElsterValueType.et_cent_val),
         ( "VERDAMPFERTEMPERATUR"                             , 0x07a9, ElsterValueType.et_dec_val),
         ( "TAU_PENDEL_ERKENNUNGSZEIT"                        , 0x07aa, 0),
         ( "VERZOEGERUNG_PENDELERKENNUNG"                     , 0x07ab, 0),
@@ -3332,6 +3332,18 @@ public partial class KElsterTable
         ( "RAUMFEUCHTE_FEK"                                  , 0x4ec8, ElsterValueType.et_dec_val),
         ( "SOLLTEMPERATUR_FEK"                               , 0x4ece, ElsterValueType.et_dec_val),
         ( "TAUPUNKTTEMPERATUR_FEK"                           , 0x4ee0, ElsterValueType.et_dec_val),
+        // Vermutung ist, dass dieser Index die Statusanzeige des Betriebszustands auf der Startseite des WPM 4 repräsentiert
+        // Auf Seite 5 des folgenden PDFs finden sich die Symbole
+        // https://www.tecalor.de/toolbox/content/docs/anleitungen/bedienung/WPM_tec/328244-43222-9639_WPM_4_Bedienung_tecalor_de.pdf
+        // Es wird davon ausgegangen, dass die Symbole binär codiert sind entspreched der Reihenfolge im PDF.
+        // 0000 0001 -> Heizkreispumpe
+        // 0000 0010 -> Mischerkreispumpe
+        // 0000 0100 -> Aufheizprogramm
+        // usw.
+        // Bisher verifiziert für TTL6.5acs
+        // 0x0051 -> 0101 0001 -> Heizkreispumpe, Heizen, Verdichter
+        // 0x0061 -> 0110 0001 -> Heizkreispumpe, Warmwasserbereitung, Verdichter
+        ( "UNKNOWN"                                          , 0x4eef, 0),
         ( "STARTS_VERDICHTER"                                , 0x4ef1, 0),
         ( "LAUFZEIT_VD_HEIZEN"                               , 0x4efb, 0),
         ( "LAUFZEIT_VD_WARMWASSER"                           , 0x4efd, 0),
@@ -3354,6 +3366,9 @@ public partial class KElsterTable
         ( "VOLUMENSTROM"                                     , 0x4f47, ElsterValueType.et_cent_val),
         ( "AUSSENTEMPERATUR"                                 , 0x4f4f, ElsterValueType.et_dec_val),
         ( "ZIRKULATIONSPUMPE"                                , 0xabeb, ElsterValueType.et_byte),
+        // ID = 0x480
+        ( "VERDICHTER"                                       , 0xabe1, ElsterValueType.et_bool),
+        ( "PUFFERLADEPUMPE"                                  , 0xabe5, ElsterValueType.et_default),
         ( "ISTDREHZAHL LUEFTER"                              , 0xc281, ElsterValueType.et_default),
         ( "SOLLDREHZAHL LUEFTER"                             , 0xc283, ElsterValueType.et_default),
         ( "VERDAMPFEREINGANGSTEMPE"                          , 0xc2bf, ElsterValueType.et_dec_val),
